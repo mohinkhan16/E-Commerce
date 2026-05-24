@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E-Commerce</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary mt-2 rounded-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ShopCart</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0 d-flex gap-4">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <button class="btn btn-primary" onclick="showModal()">
+                  cart
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="btn btn-primary" onclick="addModalShow()">
+                  add
+                </button>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <div class="container">
+        <div class="row" id="product-list"></div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="cartList"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Cart Items
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cartTable"></tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <div class="me-auto">
+                <div class="fw-bold" id="grand-total"></div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="checkOut()"
+              >
+                check out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="addProductModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                add Product
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="productForm">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="productName"
+                    placeholder="Product Name"
+                  />
+                  <label for="productName">Product Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="productPrice"
+                    placeholder="Product Price"
+                  />
+                  <label for="productPrice">Product Price</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="productImage"
+                    placeholder="Product Image"
+                  />
+                  <label for="productImage">Product Image</label>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Add Product
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <div
+        class="modal fade"
+        id="updateProductModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                update Product detail
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="updateProductForm">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="updateProductName"
+                    placeholder="Product Name"
+                  />
+                  <label for="updateProductName">Product Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="updateProductPrice"
+                    placeholder="Product Price"
+                  />
+                  <label for="updateproductPrice">Product Price</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="updateProductImage"
+                    placeholder="Product Image"
+                  />
+                  <label for="updateProductImage">Product Image</label>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    update Product
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
