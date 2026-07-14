@@ -45,24 +45,6 @@ ShopCart/
 └── README.md
 ```
 
----
-
-## 📸 Screenshots
-
-### Home Page
-
-<img src="https://via.placeholder.com/1000x500?text=ShopCart+Homepage" width="100%">
-
-### Cart Modal
-
-<img src="https://via.placeholder.com/1000x500?text=Shopping+Cart" width="100%">
-
-### Add Product
-
-<img src="https://via.placeholder.com/1000x500?text=Add+Product" width="100%">
-
----
-
 ## ⚙️ How to Run
 
 ### 1. Clone Repository
